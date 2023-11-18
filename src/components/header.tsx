@@ -5,7 +5,7 @@ import Navigation from "./navigation";
 
 function Header() {
     return (
-        <header className="w-full flex justify-between items-center p-6 bg-semiDarkBlue md:rounded-lg md:m-6">
+        <header className="w-full max-w-[77.5rem] flex justify-between items-center p-6 bg-semiDarkBlue md:rounded-lg md:m-6 sticky top-0 z-10">
             <Link href={"/"} aria-label="all movies">
                 <Image src={"/assets/logo.svg"} width={33} height={27} alt="" />
             </Link>

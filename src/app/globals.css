@@ -35,3 +35,7 @@ body {
         --color-red: 0deg 97% 63%;
     }
 }
+
+.active {
+    filter: brightness(50%) invert(100%);
+}

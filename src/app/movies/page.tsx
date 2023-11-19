@@ -1,11 +1,9 @@
-import { Key } from "react";
+import React, { Key } from "react";
 import Image from "next/image";
-import { getData } from "@/lib/getMovies";
+import { getMoviesOnly } from "@/lib/getMovies";
 import Link from "next/link";
-import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
-import Search from "@/components/search";
 
-export default async function Home({
+export default async function Page({
     searchParams,
 }: Readonly<{
     searchParams: {
@@ -13,7 +11,6 @@ export default async function Home({
         query?: string;
     };
 }>) {
-    // use searchParams to target current page.
     const query = searchParams?.query || "";
     const currentPage = Number(searchParams?.page) || 1;
     const page =
@@ -22,14 +19,12 @@ export default async function Home({
         typeof searchParams.search === "string"
             ? searchParams.search
             : undefined;
-    const data = await getData(page, query);
-  //  console.log(data);
-  //  console.log(currentPage);
-  //  console.log(query);
+    const data = await getMoviesOnly(page);
+    console.log(data);
     return (
         <main className="flex min-h-screen max-w-[77.5rem] flex-col items-center justify-between p-8">
             <h1 className="sr-only">Movies center</h1>
-            <Search placeholder="Search for..." />
+
             <h2>Recommended for you</h2>
             <ul className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-8 py-4">
                 {data?.results.map(
@@ -87,33 +82,6 @@ export default async function Home({
                     )
                 )}
             </ul>
-
-            <div className="flex justify-center items-center gap-2">
-                <Link
-                    href={{
-                        pathname: "/",
-                        query: {
-                            ...(search ? { search } : {}),
-                            page: page > 1 ? page - 1 : 1,
-                        },
-                    }}
-                >
-                    <ArrowLeftIcon className="h-6 w-6" />
-                </Link>
-                <p> {page}</p>
-                <Link
-                    href={{
-                        pathname: "/",
-                        query: {
-                            ...(search ? { search } : {}),
-                            page: page < 500 ? page + 1 : 500,
-                        },
-                    }}
-                    aria-label="Next page"
-                >
-                    <ArrowRightIcon className="h-6 w-6" />
-                </Link>
-            </div>
         </main>
     );
 }

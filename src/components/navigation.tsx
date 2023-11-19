@@ -1,9 +1,11 @@
+"use client"
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 function Navigation() {
-   
+    const pathname = usePathname();
     return (
         <nav>
             <ul className="flex gap-5">
@@ -18,7 +20,9 @@ function Navigation() {
                             width={20}
                             height={20}
                             alt=""
-                            className={`group-hover:invert group-hover:brightness-50 `}
+                            className={`group-hover:invert group-hover:brightness-50 ${
+                                pathname == "/" ? "active" : ""
+                            }`}
                         />
                     </Link>
                 </li>
@@ -33,7 +37,9 @@ function Navigation() {
                             width={20}
                             height={20}
                             alt=""
-                            className={`group-hover:invert group-hover:brightness-50 `}
+                            className={`group-hover:invert group-hover:brightness-50 ${
+                                pathname == "/movies" ? "active" : ""
+                            }`}
                         />
                     </Link>
                 </li>
@@ -48,7 +54,9 @@ function Navigation() {
                             width={20}
                             height={20}
                             alt=""
-                            className={`group-hover:invert group-hover:brightness-50`}
+                            className={`group-hover:invert group-hover:brightness-50 ${
+                                pathname == "/tvSeries" ? "active" : ""
+                            }`}
                         />
                     </Link>
                 </li>

@@ -2,6 +2,7 @@ import React, { Key } from "react";
 import Image from "next/image";
 import { getMoviesOnly } from "@/lib/getMovies";
 import Link from "next/link";
+import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 
 export default async function Page({
     searchParams,
@@ -20,12 +21,11 @@ export default async function Page({
             ? searchParams.search
             : undefined;
     const data = await getMoviesOnly(page);
-    console.log(data);
+   // console.log(data);
     return (
         <main className="flex min-h-screen max-w-[77.5rem] flex-col items-center justify-between p-8">
             <h1 className="sr-only">Movies center</h1>
-
-            <h2>Recommended for you</h2>
+            <h2>Movies for you</h2>
             <ul className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-8 py-4">
                 {data?.results.map(
                     (movie: {
@@ -45,8 +45,8 @@ export default async function Page({
                                 <Image
                                     src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
                                     alt=""
-                                    width="470"
-                                    height="230"
+                                    width="1080"
+                                    height="1620"
                                 />
                             </div>
                             <div>
@@ -56,8 +56,7 @@ export default async function Page({
                                     </p>
                                     <Image
                                         width={12}
-                                        height={12}
-                                        priority
+                                        height={12}                                        
                                         alt=""
                                         src={`${
                                             movie.media_type === "Movie"
@@ -82,6 +81,33 @@ export default async function Page({
                     )
                 )}
             </ul>
+
+            <div className="flex justify-center items-center gap-2">
+                <Link
+                    href={{
+                        pathname: "/movies",
+                        query: {
+                            ...(search ? { search } : {}),
+                            page: page > 1 ? page - 1 : 1,
+                        },
+                    }}
+                >
+                    <ArrowLeftIcon className="h-6 w-6" />
+                </Link>
+                <p> {page}</p>
+                <Link
+                    href={{
+                        pathname: "/movies",
+                        query: {
+                            ...(search ? { search } : {}),
+                            page: page < 500 ? page + 1 : 500,
+                        },
+                    }}
+                    aria-label="Next page"
+                >
+                    <ArrowRightIcon className="h-6 w-6" />
+                </Link>
+            </div>
         </main>
     );
 }

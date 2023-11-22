@@ -11,7 +11,7 @@ function Navigation() {
             <ul className="flex gap-5">
                 <li>
                     <Link
-                        href={"/"}
+                        href={"/all"}
                         aria-label="all movies and tv series"
                         className="group"
                     >
@@ -21,7 +21,7 @@ function Navigation() {
                             height={20}
                             alt=""
                             className={`group-hover:invert group-hover:brightness-50 ${
-                                pathname == "/" ? "active" : ""
+                                pathname == "/all" ? "active" : ""
                             }`}
                         />
                     </Link>

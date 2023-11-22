@@ -1,10 +1,11 @@
-import React, { Key } from "react";
+import { Key } from "react";
 import Image from "next/image";
-import { getTvSeries } from "@/lib/getMovies";
-import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
+import { getData } from "@/lib/getMovies";
 import Link from "next/link";
+import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
+import Search from "@/components/search";
 
-export default async function Page({
+export default async function Home({
     searchParams,
 }: Readonly<{
     searchParams: {
@@ -12,26 +13,28 @@ export default async function Page({
         query?: string;
     };
 }>) {
-    const query = searchParams?.query || "";
-    const currentPage = Number(searchParams?.page) || 1;
+    // use searchParams to target current page.
+    const query = searchParams?.query ?? "";
+    //  const currentPage = Number(searchParams?.page) || 1;
     const page =
         typeof searchParams.page === "string" ? Number(searchParams.page) : 1;
     const search =
         typeof searchParams.search === "string"
             ? searchParams.search
             : undefined;
-    const data = await getTvSeries(page);
-   // console.log(data);
+    const data = await getData(page, query);
+   
     return (
         <main className="flex min-h-screen max-w-[77.5rem] flex-col items-center justify-between p-8">
             <h1 className="sr-only">Movies center</h1>
-            <h2>TV Series</h2>
-            <ul className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-8 py-4">
+            <Search placeholder="Search for..." />
+            <h2>Recommended for you</h2>
+            <ul className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 lg:gap-8 py-4">
                 {data?.results.map(
                     (movie: {
                         release_date: string;
                         poster_path: string;
-                        id: Key;
+                        id: string;
                         title: string;
                         name: string;
                         media_type: string;
@@ -45,8 +48,8 @@ export default async function Page({
                                 <Image
                                     src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
                                     alt=""
-                                    width="470"
-                                    height="230"
+                                    width="2000"
+                                    height="3000"
                                 />
                             </div>
                             <div>
@@ -56,7 +59,8 @@ export default async function Page({
                                     </p>
                                     <Image
                                         width={12}
-                                        height={12}                                        
+                                        height={12}
+                                        priority
                                         alt=""
                                         src={`${
                                             movie.media_type === "Movie"
@@ -77,14 +81,16 @@ export default async function Page({
                                     {movie.title}
                                 </h2>
                             </div>
+                            <Link href={`all/${movie.id}`}>View movie {movie.id}</Link>
                         </li>
                     )
                 )}
             </ul>
+
             <div className="flex justify-center items-center gap-2">
                 <Link
                     href={{
-                        pathname: "/tvSeries",
+                        pathname: "/",
                         query: {
                             ...(search ? { search } : {}),
                             page: page > 1 ? page - 1 : 1,
@@ -96,7 +102,7 @@ export default async function Page({
                 <p> {page}</p>
                 <Link
                     href={{
-                        pathname: "/tvSeries",
+                        pathname: "/",
                         query: {
                             ...(search ? { search } : {}),
                             page: page < 500 ? page + 1 : 500,

@@ -23,7 +23,7 @@ export default async function Home({
             ? searchParams.search
             : undefined;
     const data = await getData(page, query);
-   
+
     return (
         <main className="flex min-h-screen max-w-[77.5rem] flex-col items-center justify-between p-8">
             <h1 className="sr-only">Movies center</h1>
@@ -81,7 +81,12 @@ export default async function Home({
                                     {movie.title}
                                 </h2>
                             </div>
-                            <Link href={`all/${movie.id}`}>View movie {movie.id}</Link>
+                            <Link
+                                className="absolute top-0 left-0 w-full h-full"
+                                href={`all/${movie.id}`}
+                            >
+                                <span className="sr-only">View movie {movie.name}</span>
+                            </Link>
                         </li>
                     )
                 )}

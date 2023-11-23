@@ -10,14 +10,15 @@ export default async function Page({ params }: { params: any }) {
     console.log(data);
     return (
         <main className="flex min-h-screen max-w-[77.5rem] flex-col items-center justify-between p-8">
-            <h1>{data.title} overview</h1>
+            <h1>Overview - {data.title} </h1>
             <Image
-                src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`}
+                src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
                 alt=""
                 width={1000}
                 height={2000}
                 priority
             />
+            <p>{data.overview}</p>
         </main>
     );
 }

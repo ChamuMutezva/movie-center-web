@@ -14,12 +14,22 @@ export default async function Page({ params }: { params: any }) {
             currency: "USD",
         }).format(value);
 
+    if (movie.title === undefined || movie.title === null) {
+        return (
+            <div className="flex min-h-screen max-w-[77.5rem] flex-col items-center justify-between p-8">
+                <p>Data for the movie is not available</p>
+            </div>
+        );
+    }
+
     return (
-        <main className="flex min-h-screen max-w-[77.5rem] flex-col items-center justify-between p-8">
-            <div className="grid place-content-center gap-4">
-                <div className="header">
-                    <h1 className="text-3xl">Overview - {movie.title} </h1>
-                    <p>
+        <main className=" min-h-screen w-full max-w-[77.5rem] flex-col items-center justify-between p-8">
+            <div className="w-full grid place-content-center sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="header col-span-3">
+                    <h1 className="text-3xl w-full">
+                        Overview - {movie.title}{" "}
+                    </h1>
+                    <p className="w-full">
                         Date of release{" "}
                         <time dateTime={movie.release_date}>
                             {movie.release_date}
@@ -27,7 +37,7 @@ export default async function Page({ params }: { params: any }) {
                     </p>
                 </div>
 
-                <div className="flex flex-col justify-center items-center rounded-lg overflow-hidden">
+                <div className="col-span-2 sm:col-span-1 flex flex-col justify-center items-center rounded-lg overflow-hidden">
                     <Image
                         src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
                         alt=""
@@ -36,104 +46,141 @@ export default async function Page({ params }: { params: any }) {
                     />
                 </div>
 
-                {/* Genres */}
-                <div>
-                    <h2 className="text-xl">Genres</h2>
-                    <ul className="flex justify-between">
-                        {movie.genres.map(
-                            (genre: { id: number; name: string }) => (
-                                <li key={genre.id}>{genre.name}</li>
-                            )
+                <div className="flex col-span-2  sm:col-span-1 sm:flex-col justify-between w-full">
+                    {/* Genres */}
+                    <div className="">
+                        <h2 className="text-xl">Genres</h2>
+                        {movie.genres === undefined || movie.genres === null ? (
+                            <p>No genres to display</p>
+                        ) : (
+                            <ul className="flex justify-between flex-col gap-4 py-4">
+                                {movie.genres.map(
+                                    (genre: { id: number; name: string }) => (
+                                        <li key={genre.id}>
+                                            <span className="text-base font-light p-1 border border-white rounded-lg">
+                                                {genre.name}
+                                            </span>
+                                        </li>
+                                    )
+                                )}
+                            </ul>
                         )}
-                    </ul>
-                </div>
-
-                {/* Budget and revenue */}
-                <div className="flex justify-between">
-                    <div>
-                        <h2 className="text-xl">Budget</h2>
-                        <p>{numberFormat(movie.budget)}</p>
                     </div>
-                    <div>
-                        <h2 className="text-xl">Revenue</h2>
-                        <p>{numberFormat(movie.revenue)}</p>
+                    {/* Budget and revenue */}
+                    <div className="flex flex-col gap-4 justify-between">
+                        <div>
+                            <h2 className="text-xl">Budget</h2>
+                            <p className="text-base font-light">
+                                {numberFormat(movie.budget)}
+                            </p>
+                        </div>
+                        <div>
+                            <h2 className="text-xl">Revenue</h2>
+                            <p className="text-base font-light">
+                                {numberFormat(movie.revenue)}
+                            </p>
+                        </div>
                     </div>
                 </div>
 
                 {/* Production companies */}
-                <div>
+                <div className="col-span-2 lg:col-span-1">
                     <h2 className="text-xl mb-4">Production companies</h2>
-                    <ul className="grid gap-4">
-                        {movie.production_companies.map(
-                            (company: {
-                                id: number;
-                                name: string;
-                                origin_country: string;
-                                logo_path: string;
-                            }) => (
-                                <li key={company.id}>
-                                    <h3 className="text-lg">
-                                        Name: {company.name}
-                                    </h3>
-                                    <p>
-                                        Production country{" "}
-                                        {movie.production_countries
-                                            .filter(
-                                                (country: {
-                                                    iso_3166_1: any;
-                                                }) =>
-                                                    company.origin_country ===
-                                                    country.iso_3166_1
-                                            )
-                                            .map(
-                                                (country: {
-                                                    name: string;
-                                                    iso_3166_1: any;
-                                                }) => (
-                                                    <span
-                                                        key={country.iso_3166_1}
-                                                    >
-                                                        {country.name}
-                                                    </span>
-                                                )
-                                            )}
-                                    </p>
-                                </li>
-                            )
-                        )}
-                    </ul>
-                </div>
-
-                <p>{movie.overview}</p>
-
-                <div>
-                    <h2 className="text-xl">Cast</h2>
-                    <ul className="grid place-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-8 py-4">
-                        {movie.credits.cast
-                            .slice(0, 8)
-                            .map(
-                                (actor: {
-                                    cast_id: string;
+                    {movie.production_companies === undefined ||
+                    movie.production_companies === null ? (
+                        <p>Production company data not available</p>
+                    ) : (
+                        <ul className="grid md:grid-cols-2 gap-4">
+                            {movie.production_companies.map(
+                                (company: {
+                                    id: number;
                                     name: string;
-                                    character: string;
-                                    popularity: number;
-                                    profile_path: string;
+                                    origin_country: string;
+                                    logo_path: string;
                                 }) => (
-                                    <li key={actor.cast_id}>
-                                        <p>Name: {actor.name}</p>
-                                        <p>Character: {actor.character}</p>
-                                        <p>Popularity: {actor.popularity}</p>
-                                        <Image
-                                            src={`https://image.tmdb.org/t/p/original/${actor.profile_path}`}
-                                            alt=""
-                                            width={400}
-                                            height={600}
-                                            className="rounded-lg"
-                                        />
+                                    <li key={company.id} className="cols-span-1">
+                                        <h3 className="text-lg">
+                                            Name: {company.name}
+                                        </h3>
+                                        <p className="text-base font-light">
+                                            Production country{" "}
+                                            {movie.production_countries
+                                                .filter(
+                                                    (country: {
+                                                        iso_3166_1: any;
+                                                    }) =>
+                                                        company.origin_country ===
+                                                        country.iso_3166_1
+                                                )
+                                                .map(
+                                                    (country: {
+                                                        name: string;
+                                                        iso_3166_1: any;
+                                                    }) => (
+                                                        <span
+                                                            key={
+                                                                country.iso_3166_1
+                                                            }
+                                                        >
+                                                            {country.name}
+                                                        </span>
+                                                    )
+                                                )}
+                                        </p>
                                     </li>
                                 )
                             )}
-                    </ul>
+                        </ul>
+                    )}
+                </div>
+
+                <p className="text-base font-light col-span-3">{movie.overview}</p>
+
+                <div className="col-span-3">
+                    <h2 className="text-xl">Cast</h2>
+                    {movie?.credits?.cast === undefined ||
+                    movie?.credits?.cast === null ? (
+                        <p>Cast data is not available </p>
+                    ) : (
+                        <ul className="grid place-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 lg:gap-8 py-4">
+                            {movie.credits.cast
+                                .slice(0, 8)
+                                .map(
+                                    (actor: {
+                                        cast_id: string;
+                                        name: string;
+                                        character: string;
+                                        popularity: number;
+                                        profile_path: string;
+                                    }) => (
+                                        <li
+                                            key={actor.cast_id}
+                                            className="flex flex-col gap-4"
+                                        >
+                                            <div>
+                                                <p className="text-base font-light">
+                                                    Name: {actor.name}
+                                                </p>
+                                                <p className="text-base font-light">
+                                                    Character: {actor.character}
+                                                </p>
+                                                <p className="text-base font-light">
+                                                    Popularity:{" "}
+                                                    {actor.popularity}
+                                                </p>
+                                            </div>
+                                            <Image
+                                                src={`https://image.tmdb.org/t/p/original/${actor.profile_path}`}
+                                                alt=""
+                                                width={400}
+                                                height={600}
+                                                className="rounded-lg"
+                                            />
+                                        </li>
+                                    )
+                                )}
+                        </ul>
+                    )}
                 </div>
             </div>
         </main>

@@ -95,7 +95,7 @@ export default async function Home({
             <div className="flex justify-center items-center gap-2">
                 <Link
                     href={{
-                        pathname: "/",
+                        pathname: "/all",
                         query: {
                             ...(search ? { search } : {}),
                             page: page > 1 ? page - 1 : 1,
@@ -107,7 +107,7 @@ export default async function Home({
                 <p> {page}</p>
                 <Link
                     href={{
-                        pathname: "/",
+                        pathname: "/all",
                         query: {
                             ...(search ? { search } : {}),
                             page: page < 500 ? page + 1 : 500,

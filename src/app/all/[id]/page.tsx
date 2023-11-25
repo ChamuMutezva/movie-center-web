@@ -1,10 +1,11 @@
+import Video from "@/components/video";
 import { getMovieByID } from "@/lib/getMovies";
 import Image from "next/image";
+import { Key } from "react";
 
-export default async function Page({ params }: { params: any }) {
+export default async function Page({ params }: Readonly<{ params: any }>) {
     const { id } = params;
-    //  console.log(params)
-    //  console.log(id)
+
     const movie = await getMovieByID(id);
     console.log(movie);
 
@@ -17,7 +18,8 @@ export default async function Page({ params }: { params: any }) {
     if (movie.title === undefined || movie.title === null) {
         return (
             <div className="flex min-h-screen max-w-[77.5rem] flex-col items-center justify-between p-8">
-                <p>Data for the movie is not available</p>
+                <p className="text-2xl">Data for the movie is not available</p>
+                <Video />
             </div>
         );
     }
@@ -46,14 +48,14 @@ export default async function Page({ params }: { params: any }) {
                     />
                 </div>
 
-                <div className="flex col-span-2  sm:col-span-1 sm:flex-col justify-between w-full">
+                <div className="flex col-span-2  sm:col-span-1 flex-col gap-4 justify-between w-full">
                     {/* Genres */}
                     <div className="">
                         <h2 className="text-xl">Genres</h2>
                         {movie.genres === undefined || movie.genres === null ? (
                             <p>No genres to display</p>
                         ) : (
-                            <ul className="flex justify-between flex-col gap-4 py-4">
+                            <ul className="flex justify-between gap-4 py-4">
                                 {movie.genres.map(
                                     (genre: { id: number; name: string }) => (
                                         <li key={genre.id}>
@@ -81,6 +83,26 @@ export default async function Page({ params }: { params: any }) {
                             </p>
                         </div>
                     </div>
+                    {/* Spoken Languages */}
+                    <div>
+                        <h2 className="text-xl">Spoken Languages</h2>
+                        {movie.spoken_languages === undefined ||
+                        movie.spoken_languages === null ? (
+                            <p>Data not yet available</p>
+                        ) : (
+                            <ul className="flex justify-between gap-4 py-4">
+                                {movie.spoken_languages.map(
+                                    (language: { id: Key; name: string }) => (
+                                        <li key={language.id}>
+                                            <span className="text-base font-light p-1 border border-white rounded-lg">
+                                                {language.name}
+                                            </span>
+                                        </li>
+                                    )
+                                )}
+                            </ul>
+                        )}
+                    </div>
                 </div>
 
                 {/* Production companies */}
@@ -98,7 +120,10 @@ export default async function Page({ params }: { params: any }) {
                                     origin_country: string;
                                     logo_path: string;
                                 }) => (
-                                    <li key={company.id} className="cols-span-1">
+                                    <li
+                                        key={company.id}
+                                        className="cols-span-1"
+                                    >
                                         <h3 className="text-lg">
                                             Name: {company.name}
                                         </h3>
@@ -134,7 +159,10 @@ export default async function Page({ params }: { params: any }) {
                     )}
                 </div>
 
-                <p className="text-base font-light col-span-3">{movie.overview}</p>
+                <div className="col-span-3">
+                    <h2>Overview</h2>
+                    <p className="text-base font-light">{movie.overview}</p>
+                </div>
 
                 <div className="col-span-3">
                     <h2 className="text-xl">Cast</h2>

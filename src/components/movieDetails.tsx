@@ -11,7 +11,7 @@ function MovieDetails({ movie }: { movie: MovieDetailsType }) {
     return (
         <div className="w-full grid place-content-center sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="header col-span-3">
-                <h1 className="text-3xl w-full">Overview - {movie.title} </h1>
+                <h1 className="text-3xl w-full">Overview - {movie.title || movie.name} </h1>
                 <p className="w-full">
                     Date of release{" "}
                     <time dateTime={movie.release_date}>
@@ -20,7 +20,7 @@ function MovieDetails({ movie }: { movie: MovieDetailsType }) {
                 </p>
             </div>
 
-            <div className="col-span-2 sm:col-span-1 flex flex-col justify-center items-center rounded-lg overflow-hidden">
+            <div className="col-span-3 sm:col-span-1 flex flex-col justify-center items-center rounded-lg overflow-hidden">
                 <Image
                     src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
                     alt=""
@@ -36,7 +36,7 @@ function MovieDetails({ movie }: { movie: MovieDetailsType }) {
                     {movie.genres === undefined || movie.genres === null ? (
                         <p>No genres to display</p>
                     ) : (
-                        <ul className="flex justify-between gap-4 py-4">
+                        <ul className="flex flex-wrap justify-start gap-4 py-4">
                             {movie.genres.map(
                                 (genre: { id: number; name: string }) => (
                                     <li key={genre.id}>
@@ -71,7 +71,7 @@ function MovieDetails({ movie }: { movie: MovieDetailsType }) {
                     movie.spoken_languages === null ? (
                         <p>Data not yet available</p>
                     ) : (
-                        <ul className="flex justify-between gap-4 py-4">
+                        <ul className="flex flex-wrap justify-between gap-4 py-4">
                             {movie.spoken_languages.map(
                                 (language: {
                                     iso_639_1: Key;
@@ -149,7 +149,7 @@ function MovieDetails({ movie }: { movie: MovieDetailsType }) {
                 movie?.credits?.cast === null ? (
                     <p>Cast data is not available </p>
                 ) : (
-                    <ul className="grid place-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 lg:gap-8 py-4">
+                    <ul className="grid place-items-center auto-cols-fr grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 lg:gap-8 py-4">
                         {movie.credits.cast
                             .slice(0, 8)
                             .map(
@@ -175,13 +175,25 @@ function MovieDetails({ movie }: { movie: MovieDetailsType }) {
                                                 Popularity: {actor.popularity}
                                             </p>
                                         </div>
-                                        <Image
-                                            src={`https://image.tmdb.org/t/p/original/${actor.profile_path}`}
+                                        {actor.profile_path === null || actor.profile_path === undefined ?
+                                            <Image
+                                            src={`/assets/blur.jpg`}
                                             alt=""
                                             width={400}
                                             height={600}
                                             className="rounded-lg"
                                         />
+                                        :
+                                        <Image
+                                            src={`https://image.tmdb.org/t/p/original/${actor.profile_path}`}
+                                            alt={`the profile picture of ${actor.name}`}
+                                            width={400}
+                                            height={600}
+                                            className="rounded-lg"
+                                        />
+                                        
+                                    }
+                                        
                                     </li>
                                 )
                             )}

@@ -19,6 +19,7 @@ export interface MovieType {
 
 export interface MovieDetailsType {
     title: string;
+    name: string;
     release_date: string;
     poster_path: string;
     genres: { id: number; name: string }[];

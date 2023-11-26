@@ -69,7 +69,7 @@ export async function getTvSeries(page = 1) {
 
 export async function getOneTvShow(id: any) {
     const res = await fetch(
-        `${url}/tv/${id}?language=en-US`
+        `${url}/tv/${id}?api_key=${apiKey}&sort_by=primary_release_date.desc`
     );
     if (!res.ok) {
         throw new Error("Failed to fetch data");
@@ -77,3 +77,6 @@ export async function getOneTvShow(id: any) {
 
     return res.json();
 }
+
+
+// const url = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=primary_release_date.desc';

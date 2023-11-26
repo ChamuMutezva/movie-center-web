@@ -3,6 +3,8 @@ import Image from "next/image";
 import { getTvSeries } from "@/lib/getMovies";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { backward, forward } from "../utils/utils";
+import Pagination from "@/components/pagination";
 
 export default async function Page({
     searchParams,
@@ -21,7 +23,10 @@ export default async function Page({
             ? searchParams.search
             : undefined;
     const data = await getTvSeries(page);
-   // console.log(data);
+
+    const next = forward(search!, page, "/tvSeries");
+    const previous = backward(search!, page, "/tvSeries");
+    // console.log(data);
     return (
         <main className="flex min-h-screen max-w-[77.5rem] flex-col items-center justify-between p-8">
             <h1 className="sr-only">Movies center</h1>
@@ -56,7 +61,7 @@ export default async function Page({
                                     </p>
                                     <Image
                                         width={12}
-                                        height={12}                                        
+                                        height={12}
                                         alt=""
                                         src={`${
                                             movie.media_type === "Movie"
@@ -81,32 +86,11 @@ export default async function Page({
                     )
                 )}
             </ul>
-            <div className="flex justify-center items-center gap-2">
-                <Link
-                    href={{
-                        pathname: "/tvSeries",
-                        query: {
-                            ...(search ? { search } : {}),
-                            page: page > 1 ? page - 1 : 1,
-                        },
-                    }}
-                >
-                    <ArrowLeftIcon className="h-6 w-6" />
-                </Link>
-                <p> {page}</p>
-                <Link
-                    href={{
-                        pathname: "/tvSeries",
-                        query: {
-                            ...(search ? { search } : {}),
-                            page: page < 500 ? page + 1 : 500,
-                        },
-                    }}
-                    aria-label="Next page"
-                >
-                    <ArrowRightIcon className="h-6 w-6" />
-                </Link>
-            </div>
+            <Pagination
+                forward={() => next}
+                backward={() => previous}
+                page={page}
+            />
         </main>
     );
 }

@@ -92,8 +92,8 @@ export default async function Page({ params }: Readonly<{ params: any }>) {
                         ) : (
                             <ul className="flex justify-between gap-4 py-4">
                                 {movie.spoken_languages.map(
-                                    (language: { id: Key; name: string }) => (
-                                        <li key={language.id}>
+                                    (language: { iso_639_1: Key; name: string }) => (
+                                        <li key={language.iso_639_1}>
                                             <span className="text-base font-light p-1 border border-white rounded-lg">
                                                 {language.name}
                                             </span>

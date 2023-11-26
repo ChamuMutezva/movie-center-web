@@ -23,7 +23,7 @@ export async function getMovieByID(id: any) {
         `${url}/movie/${id}?api_key=${apiKey}&language=en-US&append_to_response=credits`
     );
     if (!res.ok) {
-      // throw new Error("Failed to fetch data");
+        // throw new Error("Failed to fetch data");
     }
 
     return res.json();
@@ -39,6 +39,16 @@ export async function getMoviesOnly(page = 1) {
         throw new Error("Failed to fetch data");
     }
 
+    return res.json();
+}
+
+export async function searchMovie(page = 1, query: string) {
+    const res = await fetch(
+        `${url}/discover/movie?api_key=${apiKey}&page=${page}?query=${query}&sort_by=popularity.desc`
+    );
+    if (!res.ok) {
+        throw new Error("Failed to fetch data");
+    }
     return res.json();
 }
 

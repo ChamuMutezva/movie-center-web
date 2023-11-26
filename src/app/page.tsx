@@ -9,7 +9,7 @@ export default async function Page() {
             <div className="flex flex-col gap-8 relative z-10 top-0">
                 <h1 className="text-2xl">Movie center</h1>
                 <p>
-                    Explore all your favorite movies and TvSeries in real time
+                    Explore all your favorite movies and TV Series in real time
                     and see some upcoming movies{" "}
                 </p>
                 <Link href={"/all"} className="p-4 bg-greyishBlue inline-block rounded-lg text-center">Explore</Link>

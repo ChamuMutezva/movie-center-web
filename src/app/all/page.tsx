@@ -4,7 +4,9 @@ import Link from "next/link";
 import Search from "@/components/search";
 import Pagination from "@/components/pagination";
 import { forward, backward } from "../utils/utils";
+import { MovieType } from "../types/types";
 import React, { Key } from "react";
+import Movie from "@/components/movie";
 
 export default async function Home({
     searchParams,
@@ -32,17 +34,11 @@ export default async function Home({
             <h1 className="sr-only">Movies center</h1>
             <Search placeholder="Search for..." />
             <h2>Recommended for you</h2>
+            <Movie data={data} path= "/all/" />
+            {/*
             <ul className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 lg:gap-8 py-4">
                 {data?.results.map(
-                    (movie: {
-                        release_date: string;
-                        poster_path: string;
-                        id: Key;
-                        title: string;
-                        name: string;
-                        media_type: string;
-                        vote_average: number;
-                    }) => (
+                    (movie: MovieType) => (
                         <li
                             key={movie.id}
                             className="relative recommended-list group"
@@ -96,7 +92,7 @@ export default async function Home({
                     )
                 )}
             </ul>
-
+                                    */}
             <Pagination
                 forward={() => nextPage}
                 backward={() => previousPage}

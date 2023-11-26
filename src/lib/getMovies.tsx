@@ -64,3 +64,16 @@ export async function getTvSeries(page = 1) {
 
     return res.json();
 }
+
+// GET A SINGLE TV SHOW
+
+export async function getOneTvShow(id: any) {
+    const res = await fetch(
+        `${url}/tv/${id}?language=en-US`
+    );
+    if (!res.ok) {
+        throw new Error("Failed to fetch data");
+    }
+
+    return res.json();
+}

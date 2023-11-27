@@ -7,7 +7,7 @@ function Movie({ data, path }: { data: { results: MovieType[] } , path: string})
     return (
         <ul className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-8 py-4">
             {data?.results.map((movie: MovieType) => (
-                <li key={movie.id} className="relative recommended-list group">
+                <li key={movie.id} className="relative flex flex-col justify-between recommended-list group">
                     <div className="flex justify-center items-center">
                         <Image
                             src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
@@ -19,7 +19,7 @@ function Movie({ data, path }: { data: { results: MovieType[] } , path: string})
                     <div>
                         <div className="flex gap-4 items-center">
                             <p className="text-xs font-light opacity-75">
-                                {movie.release_date}
+                                {movie.release_date || movie.first_air_date}
                             </p>
                             <Image
                                 width={12}
@@ -41,7 +41,7 @@ function Movie({ data, path }: { data: { results: MovieType[] } , path: string})
                         <h2
                             className={`text-base md:text-lg font-normal text-[1.5rem] z-[1] relative`}
                         >
-                            {movie.title}
+                            {movie.title || movie.name}
                         </h2>
                     </div>
                     <Link

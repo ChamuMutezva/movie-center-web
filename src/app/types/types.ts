@@ -9,6 +9,7 @@ export interface PageReturnType {
 
 export interface MovieType {
     release_date: string;
+    first_air_date: string;
     poster_path: string;
     id: Key;
     title: string;

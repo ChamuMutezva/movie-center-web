@@ -51,7 +51,7 @@ export default async function Page({ params }: Readonly<{ params: any }>) {
                 <div className="flex col-span-2  sm:col-span-1 flex-col gap-4 justify-between w-full">
                     {/* Genres */}
                     <div className="">
-                        <h2 className="text-xl">Genres</h2>
+                        <h2 className="text-2xl">Genres</h2>
                         {movie.genres === undefined || movie.genres === null ? (
                             <p>No genres to display</p>
                         ) : (
@@ -80,7 +80,7 @@ export default async function Page({ params }: Readonly<{ params: any }>) {
                     </div>
                     {/* Spoken Languages */}
                     <div>
-                        <h2 className="text-xl">Spoken Languages</h2>
+                        <h2 className="text-2xl">Spoken Languages</h2>
                         {movie.spoken_languages === undefined ||
                         movie.spoken_languages === null ? (
                             <p>Data not yet available</p>
@@ -105,7 +105,7 @@ export default async function Page({ params }: Readonly<{ params: any }>) {
 
                 {/* Production companies */}
                 <div className="col-span-2 lg:col-span-1">
-                    <h2 className="text-xl mb-4">Production companies</h2>
+                    <h2 className="text-2xl mb-4">Production companies</h2>
                     {movie.production_companies === undefined ||
                     movie.production_companies === null ? (
                         <p>Production company data not available</p>
@@ -122,7 +122,7 @@ export default async function Page({ params }: Readonly<{ params: any }>) {
                                         key={company.id}
                                         className="cols-span-1"
                                     >
-                                        <h3 className="text-lg">
+                                        <h3 className="text-xl">
                                             Name: {company.name}
                                         </h3>
                                         <p className="text-base font-light">
@@ -158,18 +158,18 @@ export default async function Page({ params }: Readonly<{ params: any }>) {
                 </div>
 
                 <div className="col-span-3">
-                    <h2>Overview</h2>
+                    <h2 className="text-2xl">Overview</h2>
                     <p className="text-base font-light">{movie.overview}</p>
                 </div>
 
                 <div className="col-span-3">
-                    <h2 className="text-xl">Seasons</h2>
+                    <h2 className="text-2xl">Seasons</h2>
                     {movie?.seasons === undefined || movie?.seasons === null ? (
                         <p>Seasons data is not available </p>
                     ) : (
-                        <ul className="grid place-items-center auto-cols-fr grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 lg:gap-8 py-4">
+                        <ul className="grid place-items-center auto-cols-fr grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-8 py-4">
                             {movie.seasons
-                                .slice(0, 8)
+                                .slice(0, 9)
                                 .map(
                                     (season: {
                                         air_date: string;
@@ -181,38 +181,30 @@ export default async function Page({ params }: Readonly<{ params: any }>) {
                                     }) => (
                                         <li
                                             key={season.id}
-                                            className="flex flex-col gap-4"
+                                            className="flex flex-col bg-semiDarkBlue gap-4 p-4 h-full w-full justify-between rounded-lg shadow-2xl"
                                         >
-                                            <div>
-                                                <p className="text-base font-light">
+                                            <div className="h-full">
+                                                <h3 className="text-xl font-light">
                                                     Name: {season.name}
-                                                </p>
-                                                <p className="text-base font-light">
+                                                </h3>
+                                                <h4 className="text-lg font-light">
                                                     Episode:{" "}
                                                     {season.episode_count}
-                                                </p>
+                                                </h4>
                                                 <p className="text-base font-light">
                                                     {season.overview}
                                                 </p>
+                                                <p className="text-base font-light">
+                                                    Date first aired:{" "}
+                                                    <time
+                                                        dateTime={
+                                                            season.air_date
+                                                        }
+                                                    >
+                                                        {season.air_date}
+                                                    </time>
+                                                </p>
                                             </div>
-                                            {season.poster_path === null ||
-                                            season.poster_path === undefined ? (
-                                                <Image
-                                                    src={`/assets/blur.jpg`}
-                                                    alt=""
-                                                    width={400}
-                                                    height={600}
-                                                    className="rounded-lg"
-                                                />
-                                            ) : (
-                                                <Image
-                                                    src={`https://image.tmdb.org/t/p/original/${season.poster_path}`}
-                                                    alt={``}
-                                                    width={400}
-                                                    height={600}
-                                                    className="rounded-lg"
-                                                />
-                                            )}
                                         </li>
                                     )
                                 )}

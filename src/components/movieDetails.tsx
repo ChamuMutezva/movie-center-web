@@ -162,9 +162,9 @@ function MovieDetails({ movie }: { movie: MovieDetailsType }) {
                                 }) => (
                                     <li
                                         key={actor.cast_id}
-                                        className="flex flex-col gap-4"
+                                        className="relative flex flex-col gap-4 border-[1px] border-greyishBlue rounded-lg p-2"
                                     >
-                                        <div>
+                                        <div className="absolute left-2 right-2 bottom-2 opacity-80 bg-darkBlue">
                                             <p className="text-base font-light">
                                                 Name: {actor.name}
                                             </p>

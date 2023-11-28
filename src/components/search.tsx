@@ -6,13 +6,15 @@ import { useDebouncedCallback } from "use-debounce";
 
 export default function Search({
     placeholder,
-}: Readonly<{ placeholder: string }>) {
+    data
+}: Readonly<{ placeholder: string, data: any }>) {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
 
-    const handleSearch = useDebouncedCallback((term) => {
+    const handleSearch =  useDebouncedCallback((term) => {
         const params = new URLSearchParams(searchParams);
+        console.log(data)
         console.log(`Searching... ${term}`);
         params.set("page", "1");
         if (term) {
@@ -31,7 +33,7 @@ export default function Search({
             <input
                 id="search"
                 className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 
-                text-sm bg-darkBlue outline-2 placeholder:text-gray-500"
+                text-sm bg-darkBlue outline-2 placeholder:text-gray-500 h-12"
                 placeholder={placeholder}
                 onChange={(e) => {
                     handleSearch(e.target.value);

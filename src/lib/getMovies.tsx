@@ -43,7 +43,9 @@ export async function getMoviesOnly(page = 1) {
 }
 
 export async function searchMovie(page = 1, query: string) {
-    const res = await fetch(
+    // 'https://api.themoviedb.org/3/search/movie?query=Jack+Reacher&api_key=dc52cc88da921145988e910ebbf4d5ca'
+    // const url = 'https://api.themoviedb.org/3/search/keyword?query=monarch&page=1';
+    const res = await fetch(              
         `${url}/discover/movie?api_key=${apiKey}&page=${page}?query=${query}&sort_by=popularity.desc`
     );
     if (!res.ok) {
@@ -78,5 +80,8 @@ export async function getOneTvShow(id: any) {
     return res.json();
 }
 
-
 // const url = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=primary_release_date.desc';
+
+// const url = 'https://api.themoviedb.org/3/search/keyword?query=monarch&page=1';
+
+ //const url = 'https://api.themoviedb.org/3/search/movie?query=monarchy&include_adult=false&language=en-US&page=1';

@@ -28,6 +28,7 @@ function Movie({
                     <div className="absolute bg-darkBlue left-2 right-2 opacity-80 bottom-1">
                         <div className="flex gap-4 items-center">
                             <p className="text-xs font-light opacity-75">
+                                <span className="sr-only">Date of release</span>{" "}
                                 {movie.release_date || movie.first_air_date}
                             </p>
                             <Image
@@ -41,15 +42,18 @@ function Movie({
                                 }`}
                             />
                             <p className="text-xs font-light opacity-75">
+                                <span className="sr-only">category</span>{" "}
                                 {movie.media_type}
                             </p>
                             <p className="font-light text-sm">
+                                <span className="sr-only">Vote average</span>{" "}
                                 {movie.vote_average}
                             </p>
                         </div>
                         <h2
                             className={`text-base md:text-lg font-normal text-[1.5rem] z-[1] relative`}
                         >
+                            <span className="sr-only">Movie title</span>{" "}
                             {movie.title || movie.name}
                         </h2>
                     </div>

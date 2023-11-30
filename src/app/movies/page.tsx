@@ -4,7 +4,12 @@ import { getMoviesOnly } from "@/lib/getMovies";
 import Link from "next/link";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import Pagination from "@/components/pagination";
-import { backward, forward , forwardTenPages} from "../utils/utils";
+import {
+    backward,
+    backwardTenPages,
+    forward,
+    forwardTenPages,
+} from "../utils/utils";
 import { MovieType } from "../types/types";
 import Movie from "@/components/movie";
 
@@ -29,18 +34,20 @@ export default async function Page({
 
     const next = forward(search!, page, "/movies");
     const previous = backward(search!, page, "/movies");
-    const forwardTenPage = forwardTenPages(search!, page , "/all");
+    const nextTenPages = forwardTenPages(search!, page, "/movies");
+    const previousTenPages = backwardTenPages(search!, page, "/movies");
 
     return (
         <main className="flex min-h-screen max-w-[77.5rem] flex-col items-center justify-between p-8">
             <h1 className="sr-only">Movies center</h1>
             <h2>Movies for you</h2>
-            <Movie data={data} path="/movies/" />         
+            <Movie data={data} path="/movies/" />
 
             <Pagination
+                previousTenPages={() => previousTenPages}
                 forward={() => next}
                 backward={() => previous}
-                nextTen={() => forwardTenPage}
+                nextTen={() => nextTenPages}
                 page={page}
             />
         </main>

@@ -27,3 +27,13 @@ export function forwardTenPages(search: string, page: number, path: string) {
         },
     };
 }
+
+export function backwardTenPages(search: string, page: number, path: string) {
+    return {
+        pathname: path,
+        query: {
+            ...(search ? { search } : {}),
+            page: page > 10 ? page - 10 : page,
+        },
+    };
+}

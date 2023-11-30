@@ -3,7 +3,7 @@ import Image from "next/image";
 import { getTvSeries } from "@/lib/getMovies";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { backward, forward } from "../utils/utils";
+import { backward, forward, forwardTenPages } from "../utils/utils";
 import Pagination from "@/components/pagination";
 import { MovieType } from "../types/types";
 import Movie from "@/components/movie";
@@ -28,6 +28,7 @@ export default async function Page({
 
     const next = forward(search!, page, "/tvSeries");
     const previous = backward(search!, page, "/tvSeries");
+    const forwardTenPage = forwardTenPages(search!, page , "/all");
     // console.log(data);
     return (
         <main className="flex min-h-screen max-w-[77.5rem] flex-col items-center justify-between p-8">
@@ -38,6 +39,7 @@ export default async function Page({
             <Pagination
                 forward={() => next}
                 backward={() => previous}
+                nextTen={() => forwardTenPage}
                 page={page}
             />
         </main>

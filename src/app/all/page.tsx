@@ -1,9 +1,10 @@
 import { getData, searchMovie } from "@/lib/getMovies";
 import Search from "@/components/search";
 import Pagination from "@/components/pagination";
-import { forward, backward } from "../utils/utils";
+import { forward, backward,  forwardTenPages } from "../utils/utils";
 import React from "react";
 import Movie from "@/components/movie";
+import Link from "next/link";
 
 export default async function Home({
     searchParams,
@@ -24,11 +25,14 @@ export default async function Home({
             : undefined;
 
     const data = await getData(page, query);
+    console.log(data);
+    console.log(data.total_pages);
     const queryData = await searchMovie(page, search!);
     console.log(queryData);
 
     const nextPage = forward(search!, page, "/all");
     const previousPage = backward(search!, page, "/all");
+    const forwardTenPage = forwardTenPages(search!, page , "/all");
 
     return (
         <main className="flex min-h-screen max-w-[77.5rem] flex-col items-center justify-between p-8">
@@ -40,8 +44,9 @@ export default async function Home({
             <Pagination
                 forward={() => nextPage}
                 backward={() => previousPage}
+                nextTen={() => forwardTenPage}
                 page={page}
-            />
+            />          
         </main>
     );
 }

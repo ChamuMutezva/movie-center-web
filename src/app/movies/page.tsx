@@ -1,8 +1,5 @@
-import React, { Key } from "react";
-import Image from "next/image";
+import React from "react";
 import { getMoviesOnly } from "@/lib/getMovies";
-import Link from "next/link";
-import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import Pagination from "@/components/pagination";
 import {
     backward,
@@ -10,7 +7,6 @@ import {
     forward,
     forwardTenPages,
 } from "../utils/utils";
-import { MovieType } from "../types/types";
 import Movie from "@/components/movie";
 
 export default async function Page({
@@ -42,7 +38,6 @@ export default async function Page({
             <h1 className="sr-only">Movies center</h1>
             <h2>Movies for you</h2>
             <Movie data={data} path="/movies/" />
-
             <Pagination
                 previousTenPages={() => previousTenPages}
                 forward={() => next}

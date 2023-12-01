@@ -18,12 +18,23 @@ function Movie({
                     className="relative flex flex-col justify-between recommended-list group border-[1px] border-greyishBlue rounded-lg p-2"
                 >
                     <div className="flex justify-center items-center">
-                        <Image
-                            src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-                            alt=""
-                            width="470"
-                            height="230"
-                        />
+                        {movie.poster_path === undefined ||
+                        movie.poster_path === null ? (
+                            <Image
+                                src={`/assets/blur.jpg`}
+                                alt=""
+                                width={400}
+                                height={600}
+                                className="rounded-lg"
+                            />
+                        ) : (
+                            <Image
+                                src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                                alt=""
+                                width="470"
+                                height="230"
+                            />
+                        )}
                     </div>
                     <div className="absolute bg-darkBlue left-2 right-2 opacity-80 bottom-1">
                         <div className="flex gap-4 items-center">

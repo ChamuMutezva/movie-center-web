@@ -42,14 +42,14 @@ export async function getMoviesOnly(page = 1) {
     return res.json();
 }
 
-export async function searchMovie(page = 1, query: string) {
+export async function searchMovie( query: string) {
     // 'https://api.themoviedb.org/3/search/movie?query=Jack+Reacher&api_key=dc52cc88da921145988e910ebbf4d5ca'
     // const url = 'https://api.themoviedb.org/3/search/keyword?query=monarch&page=1';
     const res = await fetch(              
-        `${url}/discover/movie?api_key=${apiKey}&page=${page}?query=${query}&sort_by=popularity.desc`
+        `${url}/search/movie?query=${query}&api_key=${apiKey}&sort_by=popularity.desc`
     );
     if (!res.ok) {
-        throw new Error("Failed to fetch data");
+      //  throw new Error("Failed to fetch data");
     }
     return res.json();
 }

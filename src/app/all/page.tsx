@@ -7,9 +7,8 @@ import {
     forwardTenPages,
     backwardTenPages,
 } from "../utils/utils";
-import React from "react";
+import React, { Suspense } from "react";
 import Movie from "@/components/movie";
-import Link from "next/link";
 
 export default async function Home({
     searchParams,
@@ -30,10 +29,13 @@ export default async function Home({
             : undefined;
 
     const data = await getData(page, query);
-    console.log(data);
-    console.log(data.total_pages);
-    const queryData = await searchMovie(page, search!);
-    console.log(queryData);
+
+    const queryData = await searchMovie(query);
+    const totalPages = queryData.total_pages;
+    console.log(totalPages);
+    // console.log(queryData);
+
+    // console.log(data);
 
     const nextPage = forward(search!, page, "/all");
     const previousPage = backward(search!, page, "/all");
@@ -45,7 +47,16 @@ export default async function Home({
             <h1 className="sr-only">Movies center</h1>
             <Search placeholder="Search for..." data={queryData} />
             <h2 className="my-4">Recommended for you</h2>
-            <Movie data={data} path="/all/" />
+            <Suspense key={query + currentPage}>
+                <Movie
+                    data={
+                        query === "" || queryData.results.length === 0
+                            ? data
+                            : queryData
+                    }
+                    path="/all/"
+                />
+            </Suspense>
 
             <Pagination
                 previousTenPages={() => previousTenPages}

@@ -20,34 +20,34 @@ function Pagination({
         <div className="flex justify-center items-center gap-2">
             <Link
                 href={previousTenPages()}
-                className="flex justify-center items-center border border-white rounded-sm p-2"
+                className="flex justify-center items-center border border-white hover:border-[#01d277] focus:border-[#01d277] rounded-sm p-2 group"
                 aria-label="previous ten pages"
             >
-                <ArrowLeftIcon className="h-6 w-6" />
-                <ArrowLeftIcon className="h-6 w-6" />
+                <ArrowLeftIcon className="h-6 w-6 group-hover:text-[#01d277] group-focus:text-[#01d277]" />
+                <ArrowLeftIcon className="h-6 w-6 group-hover:text-[#01d277] group-focus:text-[#01d277]" />
             </Link>
             <Link
                 href={backward()}
-                className="flex justify-center items-center border border-white rounded-sm p-2"
+                className="flex justify-center items-center border border-white hover:border-[#01d277] focus:border-[#01d277] rounded-sm p-2 group"
                 aria-label="Previous page"
             >
-                <ArrowLeftIcon className="h-6 w-6" />
+                <ArrowLeftIcon className="h-6 w-6 group-hover:text-[#01d277] group-focus:text-[#01d277]" />
             </Link>
             <p> {page}</p>
             <Link
                 href={forward()}
                 aria-label="Next page"
-                className="flex justify-center items-center border border-white rounded-sm p-2"
+                className="flex justify-center items-center border border-white hover:border-[#01d277] focus:border-[#01d277] rounded-sm p-2 group"
             >
-                <ArrowRightIcon className="h-6 w-6" />
+                <ArrowRightIcon className="h-6 w-6 group-hover:text-[#01d277] group-focus:text-[#01d277]" />
             </Link>
             <Link
                 href={nextTen()}
                 aria-label="Next Ten pages"
-                className="flex justify-center items-center border border-white rounded-sm p-2"
+                className="flex justify-center items-center border border-white hover:border-[#01d277] focus:border-[#01d277] rounded-sm p-2 group"
             >
-                <ArrowRightIcon className="h-6 w-6" />
-                <ArrowRightIcon className="h-6 w-6" />
+                <ArrowRightIcon className="h-6 w-6 group-hover:text-[#01d277] group-focus:text-[#01d277]" />
+                <ArrowRightIcon className="h-6 w-6 group-hover:text-[#01d277] group-focus:text-[#01d277]" />
             </Link>
         </div>
     );

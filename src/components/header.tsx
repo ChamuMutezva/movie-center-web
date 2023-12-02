@@ -7,7 +7,7 @@ function Header() {
     return (
         <header className="w-full max-w-[77.5rem] flex justify-between items-center p-6 bg-semiDarkBlue md:rounded-lg md:m-6 relative top-0 z-10">
             <Link href={"/"} aria-label="all movies">
-                <Image src={"/assets/logo.svg"} width={33} height={27} alt="" />
+                <Image src={"/tmdb.svg"} width={101.84} height={40} alt="" />
             </Link>
 
             <Navigation />
@@ -15,8 +15,8 @@ function Header() {
                 <button aria-label="log out">
                     <Image
                         src={"/assets/image-avatar.png"}
-                        width={24}
-                        height={24}
+                        width={40}
+                        height={40}
                         alt=""
                     />
                 </button>

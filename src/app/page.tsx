@@ -1,6 +1,7 @@
 import Video from "@/components/video";
 import Link from "next/link";
 
+// Landing page
 export default async function Page() {
     return (
         <main className="flex h-full max-w-[77.5rem] flex-col items-center justify-between p-8">
@@ -10,7 +11,7 @@ export default async function Page() {
                 <h1 className="text-2xl">Movie center</h1>
                 <p>
                     Explore all your favorite movies and TV Series in real time
-                    and see some upcoming movies{" "}
+                    and see some upcoming movies. Search for any of your memorable movies.
                 </p>
                 <Link href={"/all"} className="p-4 bg-greyishBlue inline-block rounded-lg text-center">Explore</Link>
             </div>

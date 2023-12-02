@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 const outfit = Outfit({
     subsets: ["latin"],
@@ -22,9 +23,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
     children,
-}: {
+}: Readonly<{
     children: React.ReactNode;
-}) {
+}>) {
     return (
         <html lang="en">
             <head>
@@ -56,6 +57,7 @@ export default function RootLayout({
             <body className={outfit.className}>
                 <Header />
                 {children}
+                <Footer />
             </body>
         </html>
     );

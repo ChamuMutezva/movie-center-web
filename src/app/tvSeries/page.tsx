@@ -1,12 +1,14 @@
-import React, { Key } from "react";
-import Image from "next/image";
+import React, { Suspense } from "react";
 import { getTvSeries } from "@/lib/getMovies";
-import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
-import { backward, backwardTenPages, forward, forwardTenPages } from "../utils/utils";
+import {
+    backward,
+    backwardTenPages,
+    forward,
+    forwardTenPages,
+} from "../utils/utils";
 import Pagination from "@/components/pagination";
-import { MovieType } from "../types/types";
 import Movie from "@/components/movie";
+import Loading from "@/shared/loading";
 
 export default async function Page({
     searchParams,
@@ -16,7 +18,7 @@ export default async function Page({
         query?: string;
     };
 }>) {
-    const query = searchParams?.query || "";
+    const query = searchParams?.query ?? "";
     const currentPage = Number(searchParams?.page) || 1;
     const page =
         typeof searchParams.page === "string" ? Number(searchParams.page) : 1;
@@ -35,7 +37,9 @@ export default async function Page({
         <main className="flex min-h-screen max-w-[77.5rem] flex-col items-center justify-between p-8">
             <h1 className="sr-only">Movies center</h1>
             <h2>TV Series</h2>
-            <Movie data={data} path="/tvSeries/" />
+            <Suspense key={query + currentPage} fallback={<Loading />}>
+                <Movie data={data} path="/tvSeries/" />
+            </Suspense>
 
             <Pagination
                 previousTenPages={() => previousTenPages}

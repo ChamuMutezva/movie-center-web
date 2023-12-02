@@ -1,5 +1,6 @@
 import React from "react";
 
+// decorative video
 function Video() {
     return (
         <video

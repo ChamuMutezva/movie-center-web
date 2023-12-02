@@ -1,6 +1,7 @@
 import { getData, searchMovie } from "@/lib/getMovies";
 import Search from "@/components/search";
 import Pagination from "@/components/pagination";
+import Loading from "../../shared/loading";
 import {
     forward,
     backward,
@@ -47,7 +48,8 @@ export default async function Home({
             <h1 className="sr-only">Movies center</h1>
             <Search placeholder="Search for..." data={queryData} />
             <h2 className="my-4">Recommended for you</h2>
-            <Suspense key={query + currentPage}>
+            {/* <Suspense> lets you display a fallback until its children have finished loading. */}
+            <Suspense key={query + currentPage} fallback={<Loading />}>
                 <Movie
                     data={
                         query === "" || queryData.results.length === 0

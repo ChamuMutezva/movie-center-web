@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { getMoviesOnly } from "@/lib/getMovies";
 import Pagination from "@/components/pagination";
 import {
@@ -8,6 +8,7 @@ import {
     forwardTenPages,
 } from "../utils/utils";
 import Movie from "@/components/movie";
+import Loading from "../../shared/loading";
 
 export default async function Page({
     searchParams,
@@ -37,7 +38,9 @@ export default async function Page({
         <main className="flex min-h-screen max-w-[77.5rem] flex-col items-center justify-between p-8">
             <h1 className="sr-only">Movies center</h1>
             <h2>Movies for you</h2>
-            <Movie data={data} path="/movies/" />
+            <Suspense key={query + currentPage} fallback={<Loading />}>
+                <Movie data={data} path="/movies/" />
+            </Suspense>
             <Pagination
                 previousTenPages={() => previousTenPages}
                 forward={() => next}

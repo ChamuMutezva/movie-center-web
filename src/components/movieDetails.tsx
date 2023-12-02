@@ -1,17 +1,22 @@
 import React, { Key } from "react";
 import Image from "next/image";
 import { MovieDetailsType } from "@/app/types/types";
+import Link from "next/link";
 
 function MovieDetails({ movie }: { movie: MovieDetailsType }) {
+    // Format to USD
     const numberFormat = (value: number | bigint) =>
         new Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "USD",
         }).format(value);
+
     return (
         <div className="w-full grid place-content-center sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="header col-span-3">
-                <h1 className="text-3xl w-full">Overview - {movie.title || movie.name} </h1>
+                <h1 className="text-3xl w-full">
+                    Overview - {movie.title || movie.name}{" "}
+                </h1>
                 <p className="w-full">
                     Date of release{" "}
                     <time dateTime={movie.release_date}>
@@ -48,19 +53,37 @@ function MovieDetails({ movie }: { movie: MovieDetailsType }) {
                             )}
                         </ul>
                     )}
+                    <p className="text-[#01d277]">
+                        Runtime: {movie.runtime} minutes
+                    </p>
+                    <p>
+                        Homepage:{" "}
+                        <Link
+                            rel="no-opener"
+                            target="_blank"
+                            href={movie.homepage}
+                            className="text-[#01d277]"
+                        >
+                            {movie.homepage}
+                        </Link>
+                    </p>
                 </div>
                 {/* Budget and revenue */}
                 <div className="flex flex-col gap-4 justify-between">
                     <div>
                         <h2 className="text-xl">Budget</h2>
                         <p className="text-base font-light">
-                            {numberFormat(movie.budget)}
+                            {movie.budget === 0
+                                ? "Budget data not disclosed"
+                                : numberFormat(movie.budget)}
                         </p>
                     </div>
                     <div>
                         <h2 className="text-xl">Revenue</h2>
                         <p className="text-base font-light">
-                            {numberFormat(movie.revenue)}
+                            {movie.budget === 0
+                                ? "Revenue data not disclosed"
+                                : numberFormat(movie.revenue)}
                         </p>
                     </div>
                 </div>
@@ -93,8 +116,9 @@ function MovieDetails({ movie }: { movie: MovieDetailsType }) {
             <div className="col-span-2 lg:col-span-1">
                 <h2 className="text-xl mb-4">Production companies</h2>
                 {movie.production_companies === undefined ||
-                movie.production_companies === null ? (
-                    <p>Production company data not available</p>
+                movie.production_companies === null ||
+                movie.production_companies.length === 0 ? (
+                    <p>Production companies data not available</p>
                 ) : (
                     <ul className="grid md:grid-cols-2 gap-4">
                         {movie.production_companies.map(
@@ -175,25 +199,24 @@ function MovieDetails({ movie }: { movie: MovieDetailsType }) {
                                                 Popularity: {actor.popularity}
                                             </p>
                                         </div>
-                                        {actor.profile_path === null || actor.profile_path === undefined ?
+                                        {actor.profile_path === null ||
+                                        actor.profile_path === undefined ? (
                                             <Image
-                                            src={`/assets/blur.jpg`}
-                                            alt=""
-                                            width={400}
-                                            height={600}
-                                            className="rounded-lg"
-                                        />
-                                        :
-                                        <Image
-                                            src={`https://image.tmdb.org/t/p/original/${actor.profile_path}`}
-                                            alt={`the profile picture of ${actor.name}`}
-                                            width={400}
-                                            height={600}
-                                            className="rounded-lg"
-                                        />
-                                        
-                                    }
-                                        
+                                                src={`/assets/blur.jpg`}
+                                                alt=""
+                                                width={400}
+                                                height={600}
+                                                className="rounded-lg"
+                                            />
+                                        ) : (
+                                            <Image
+                                                src={`https://image.tmdb.org/t/p/original/${actor.profile_path}`}
+                                                alt={`the profile picture of ${actor.name}`}
+                                                width={400}
+                                                height={600}
+                                                className="rounded-lg"
+                                            />
+                                        )}
                                     </li>
                                 )
                             )}

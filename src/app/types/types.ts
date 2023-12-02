@@ -19,6 +19,8 @@ export interface MovieType {
 }
 
 export interface MovieDetailsType {
+    homepage: string;
+    runtime: number;
     title: string;
     name: string;
     release_date: string;

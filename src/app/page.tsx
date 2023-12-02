@@ -13,7 +13,7 @@ export default async function Page() {
                     Explore all your favorite movies and TV Series in real time
                     and see some upcoming movies. Search for any of your memorable movies.
                 </p>
-                <Link href={"/all"} className="p-4 bg-greyishBlue inline-block rounded-lg text-center">Explore</Link>
+                <Link href={"/all"} className="p-4 bg-greyishBlue inline-block rounded-lg text-center max-w-[20rem]">Explore</Link>
             </div>
         </main>
     );

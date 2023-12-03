@@ -50,6 +50,7 @@ In the code below, the `loading` component will be displayed until the `Movie` c
  </Suspense>
 ```
 
+```mermaid
 Flowchart TD
 id1[("`This **is** _Markdown_`")]-->
     lines["`line 1
@@ -60,3 +61,4 @@ id1[("`This **is** _Markdown_`")]-->
        routes
     }
     a --> b --> c -->d
+```

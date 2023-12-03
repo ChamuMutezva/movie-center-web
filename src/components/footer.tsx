@@ -18,7 +18,7 @@ function Footer() {
                 created by
                 <a
                     target="_blank"
-                    href="https://github.com/ChamuMutezva/entertainment-web-app-mongo"
+                    href="https://github.com/ChamuMutezva/movie-center-web"
                     className="text-[#01d277] font-extralight hover:opacity-60 focus:opacity-60"
                 >
                     {" "}

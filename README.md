@@ -51,7 +51,7 @@ In the code below, the `loading` component will be displayed until the `Movie` c
 ```
 
 ```mermaid
-Flowchart TD
+flowchart TD
 id1[("`This **is** _Markdown_`")]-->
     lines["`line 1
         line 2

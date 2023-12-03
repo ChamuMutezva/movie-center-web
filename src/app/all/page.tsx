@@ -30,14 +30,10 @@ export default async function Home({
             : undefined;
 
     const data = await getData(page, query);
-
     const queryData = await searchMovie(query);
     const totalPages = queryData.total_pages;
     console.log(totalPages);
-    // console.log(queryData);
-
-    // console.log(data);
-
+   
     const nextPage = forward(search!, page, "/all");
     const previousPage = backward(search!, page, "/all");
     const nextTenPages = forwardTenPages(search!, page, "/all");

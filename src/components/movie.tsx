@@ -72,7 +72,9 @@ function Movie({
                         className="absolute top-0 left-0 w-full h-full"
                         href={`${path}${movie.id}`}
                     >
-                        <span className="sr-only">View movie {movie.name}</span>
+                        <span className="sr-only">
+                            View movie {movie.name || movie.title}
+                        </span>
                     </Link>
                 </li>
             ))}

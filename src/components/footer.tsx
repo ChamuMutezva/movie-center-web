@@ -1,8 +1,9 @@
 import React from "react";
+import Image from "next/image";
 
 function Footer() {
     return (
-        <footer className="py-8 px-4 text-white">
+        <footer className="py-8 px-4 text-white max-w-sm">
             <p className="text-center font-extralight">
                 This is a solution to the
                 <a
@@ -24,10 +25,13 @@ function Footer() {
                     Chamu Mutezva
                 </a>
             </p>
-            <p className="text-center font-extralight">
-                Frontend Mentor challenges help you improve your coding skills
-                by building realistic project.
-            </p>
+            <div className="flex flex-col justify-center items-center mt-8">
+                <Image src={"/tmdb3.svg"} width={423.04} height={35.4} alt="" />
+                <p className="text-center font-extralight">
+                    This product uses the TMDB API but is not endorsed or
+                    certified by TMDB.
+                </p>
+            </div>
         </footer>
     );
 }

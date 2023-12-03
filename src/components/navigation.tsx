@@ -8,7 +8,7 @@ function Navigation() {
     const pathname = usePathname();
     return (
         <nav>
-            <ul className="flex gap-5">
+            <ul className="flex gap-2 sm:gap-6">
                 <li>
                     <Link
                         href={"/all"}

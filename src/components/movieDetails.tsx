@@ -64,7 +64,7 @@ function MovieDetails({ movie }: { movie: MovieDetailsType }) {
                             href={movie.homepage}
                             className="text-[#01d277]"
                         >
-                            {movie.homepage}
+                            {movie.title || movie.name}
                         </Link>
                     </p>
                 </div>

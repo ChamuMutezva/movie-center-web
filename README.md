@@ -92,3 +92,42 @@ flowchart LR
      attribution-->logo[<img>TMDB logo]
      attribution-->message[TMDB attribution message]
 ```
+
+## The Movies page
+
+The Flowchart for the movies pages is almost identical. The process is as below:
+
+- when any of the links `all , movies, tv series` has been selected, a page is loaded with the respective movies.
+- the `all movies` link has an additional search function
+- when the movies are loaded , the user can view the detailed page by clicking on the movie
+
+```mermaid
+---
+title: List of Movies Page
+---
+flowchart LR
+    landing[Landing Page]--> all[All movies and Series]
+    all-->main[<main>main]
+    main-->h1[<h1>Movie center]
+    main-->h2[<h2>Recommended]
+    main-->ul[<ul>Movie list]
+    ul--20 items-->li[<li>Movie]    
+    main-->pagination[<div>pagination]
+    landing--> movies[Movies]
+    landing--> tv[TV Series]
+    landing--> bookmarked[Bookmarked]
+```
+
+## Functions
+
+```mermaid
+---
+title: Fetch data from database
+---
+classDiagram
+    Movie --> getData    
+    Movie : +number page
+    Movie : +string query
+    getData : ==>fetch()    
+    
+```

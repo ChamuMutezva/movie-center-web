@@ -50,12 +50,45 @@ In the code below, the `loading` component will be displayed until the `Movie` c
  </Suspense>
 ```
 
+## Flowchart diagrams
+
 ```mermaid
 ---
 title: Header
 ---
-flowchart LR
-     home--> 
-     attribution[tmdb logo]--nav-->
-     nav[All Movies /  Movies / TV Series / Bookmark]-->
+flowchart TB
+     home--> landing[Landing Page]
+     home-->      
+     attribution[tmdb logo]-->       
+     nav[Navigation]-->
      signin[SignIn/Login]
+     navs-->All[All Movies]
+     navs-->Movies[Movies]
+     navs-->TV[TV Series]
+     navs-->Bookmarks
+     nav-->navs
+```
+
+## The Landing Page
+
+The landing page is comprised of the shared Header element , the main and the footer element. The workflow of the Landing page is shown below.
+
+```mermaid
+---
+title: Landing Page
+---
+flowchart LR
+     landing[Landing Page]--> header
+     landing--> main[<main>main]
+     landing--> footer[<footer>footer]
+     main--> h1[<h1>Movie center</h1>]
+     main--> p[<p>Explore all your...</p>]
+     main--> link[Link button - explore]
+     link--> all[<a>All movies link]
+     footer-->footerp[<p>This is a solution...]
+     footerp-->frontendmentor[<a>Link to Frontend Mentor Challenge]
+     footerp-->github[<a>Chamu GitHub]
+     footer-->attribution[<div> TMDB]
+     attribution-->logo[<img>TMDB logo]
+     attribution-->message[TMDB attribution message]
+```

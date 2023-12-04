@@ -20,9 +20,9 @@ function Header() {
             <div className="flex gap-2">
                 <button aria-label="log out">
                     <Image
-                        src={"/assets/image-avatar.png"}
-                        width={40}
-                        height={40}
+                        src={"/assets/ckm-logo2.png"}
+                        width={50}
+                        height={50}
                         alt=""
                     />
                 </button>

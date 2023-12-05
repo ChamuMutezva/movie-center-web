@@ -18,7 +18,7 @@ export default async function Page({
         query?: string;
     };
 }>) {
-    const query = searchParams?.query || "";
+    const query = searchParams?.query ?? "";
     const currentPage = Number(searchParams?.page) || 1;
     const page =
         typeof searchParams.page === "string" ? Number(searchParams.page) : 1;

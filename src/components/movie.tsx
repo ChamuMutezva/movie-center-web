@@ -6,10 +6,10 @@ import Link from "next/link";
 function Movie({
     data,
     path,
-}: {
+}: Readonly<{
     data: { results: MovieType[] };
     path: string;
-}) {
+}>) {
     return (
         <ul className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-8 py-4">
             {data?.results.map((movie: MovieType) => (
@@ -61,12 +61,12 @@ function Movie({
                                 {movie.vote_average}
                             </p>
                         </div>
-                        <h2
+                        <h3
                             className={`text-base md:text-lg font-normal text-[1.5rem] z-[1] relative`}
                         >
                             <span className="sr-only">Movie title</span>{" "}
                             {movie.title || movie.name}
-                        </h2>
+                        </h3>
                     </div>
                     <Link
                         className="absolute top-0 left-0 w-full h-full"

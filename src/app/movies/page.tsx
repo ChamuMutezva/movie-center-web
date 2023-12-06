@@ -9,6 +9,7 @@ import {
 } from "../utils/utils";
 import Movie from "@/components/movie";
 import Loading from "../../shared/loading";
+import Title from "@/components/title";
 
 export default async function Page({
     searchParams,
@@ -36,7 +37,7 @@ export default async function Page({
 
     return (
         <main className="flex min-h-screen max-w-[77.5rem] flex-col items-center justify-between p-8">
-            <h1 className="sr-only">Movies center</h1>
+            <Title title="movies only" />
             <h2>Movies for you</h2>
             <Suspense key={query + currentPage} fallback={<Loading />}>
                 <Movie data={data} path="/movies/" />

@@ -10,6 +10,7 @@ import {
 } from "../utils/utils";
 import React, { Suspense } from "react";
 import Movie from "@/components/movie";
+import Title from "@/components/title";
 
 export default async function Home({
     searchParams,
@@ -33,7 +34,7 @@ export default async function Home({
     const queryData = await searchMovie(query);
     const totalPages = queryData.total_pages;
     console.log(totalPages);
-   
+
     const nextPage = forward(search!, page, "/all");
     const previousPage = backward(search!, page, "/all");
     const nextTenPages = forwardTenPages(search!, page, "/all");
@@ -41,7 +42,7 @@ export default async function Home({
 
     return (
         <main className="flex min-h-screen max-w-[77.5rem] flex-col items-center justify-between p-8">
-            <h1 className="sr-only">Movies center</h1>
+            <Title title="tv series and movies" />
             <Search placeholder="Search for..." data={queryData} />
             <h2 className="my-4">Recommended for you</h2>
             {/* <Suspense> lets you display a fallback until its children have finished loading. */}

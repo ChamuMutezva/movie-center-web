@@ -131,3 +131,16 @@ classDiagram
     getData : ==>fetch()    
     
 ```
+
+## How do I generate a session id?
+
+```mermaid
+---
+title: Generating a session id
+---
+flowchart TD
+    Step1[Create a new request token]-->
+    Step2[Get the user to authorize the request token]-->
+    Step3[Create a new session id with the athorized request token]-->
+    Step4[End]
+```

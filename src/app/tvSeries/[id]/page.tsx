@@ -28,7 +28,7 @@ export default async function Page({ params }: Readonly<{ params: any }>) {
         <main className=" min-h-screen w-full max-w-[77.5rem] flex-col items-center justify-between p-8">
             <div className="w-full grid place-content-center sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div className="header col-span-3">
-                    <h1 className="text-3xl w-full">
+                    <h1 className="text-4xl w-full">
                         Overview - {movie.title || movie.name}{" "}
                     </h1>
                     <p className="w-full">

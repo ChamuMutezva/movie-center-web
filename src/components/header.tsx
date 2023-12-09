@@ -13,6 +13,7 @@ function Header() {
                 src={"/tmdb2.svg"}
                 width={95.27}
                 height={40.76}
+                className="hidden sm:block"
                 alt="This product uses the TMDB API but is not endorsed or
                     certified by TMDB."
             />

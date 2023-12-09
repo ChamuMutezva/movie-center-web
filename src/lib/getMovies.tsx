@@ -4,7 +4,7 @@ const apiKey = `${process.env.NEXT_PUBLIC_TMDB_API_KEY}`;
 // GET ALL MOVIES AND TVSERIES
 export async function getData(page: number, query: string) {
     const res = await fetch(
-        `${url}/trending/all/day?api_key=${apiKey}&page=${page}&query=${query}`
+        `${url}/trending/all/day?api_key=${apiKey}&page=${page}&query=${query}&sort_by=popularity.desc`
     );
     // The return value is *not* serialized
     // You can return Date, Map, Set, etc.
@@ -77,3 +77,18 @@ export async function getOneTvShow(id: any) {
 
     return res.json();
 }
+
+// CREATE REQUEST TOKEN
+export async function getToken() {
+    // const url = 'https://api.themoviedb.org/3/authentication/token/new';
+    const res = await fetch(
+        `${url}/authentication/token/new?api_key=${apiKey}`
+    );
+    if (!res.ok) {
+        throw new Error("Failed to fetch data");
+    }
+
+    return res.json();
+}
+
+
